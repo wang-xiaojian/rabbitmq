@@ -1,5 +1,6 @@
 package com.zhixuyuan.rabbitmq.controller;
 
+import com.zhixuyuan.rabbitmq.model.User;
 import com.zhixuyuan.rabbitmq.producer.HelloSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,14 @@ public class Controller {
     HelloSender helloSender;
     @GetMapping
     public String index() {
-        helloSender.send();
+
+//        helloSender.send();
+        User user = new User();
+        user.setUsername("张三");
+        user.setPassword("123456");
+        helloSender.send(user);
+        helloSender.send1();
+        helloSender.send2();
         return "hello";
     }
 }

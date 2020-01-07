@@ -55,6 +55,10 @@ public class RabbitConfig {
     public static final String ROUTINGKEY_B = "spring-boot-routingKey_B";
     public static final String ROUTINGKEY_C = "spring-boot-routingKey_C";
 
+
+    public final static String message = "topic.message";
+    public final static String messages = "topic.messages";
+
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory(host,port);
@@ -90,28 +94,12 @@ public class RabbitConfig {
      * @return
      */
     @Bean
-    public Queue queueEXCHANGE_C() {
-        return new Queue(EXCHANGE_C, true); //队列持久
-    }
-    @Bean
     public Queue queueA() {
         return new Queue(QUEUE_A, true); //队列持久
     }
     @Bean
     public Binding binding() {
-
         return BindingBuilder.bind(queueA()).to(defaultExchange()).with(RabbitConfig.ROUTINGKEY_A);
     }
-    @Bean
-    public Binding bindingB(){
-        return BindingBuilder.bind(queueB()).to(defaultExchange()).with(RabbitConfig.ROUTINGKEY_B);
-    }
-    @Bean
-    public Queue queueB() {
-        return new Queue(QUEUE_B, true); //队列持久
-    }
-    @Bean
-    public Queue queueC() {
-        return new Queue(QUEUE_C, true); //队列持久
-    }
+
 }
